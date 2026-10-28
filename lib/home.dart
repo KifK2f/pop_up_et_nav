@@ -12,6 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  IconData _iconData =  Icons.person;
+
   void _showSnackBar(){
       SnackBar snackBar = SnackBar( //SnackBar permet de dire par exemple à l'utilisateur qu'il est connecté ou déconnecrté
           content: const Text("Nous avons montré une SnackBar"),
@@ -24,6 +26,41 @@ class _HomePageState extends State<HomePage> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+  
+  void _simpleDialog(){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) { //Builder va être une fonction qui va nous ramener un buil context
+          return SimpleDialog(
+              title: const Text("Change l'icone"),
+            children: [
+                _dialogButton(text: "Home", iconData: Icons.house),
+                _dialogButton(text: "Personne", iconData: Icons.person)
+            ],
+          );
+        }
+    );
+  }
+
+
+  TextButton _dialogButton({required String text, required IconData iconData }){
+    return TextButton(
+        onPressed: (){
+          setState(() {
+            _iconData = iconData;
+            Navigator.pop(context);// Fermer la SimpleDialog juste après appui sur Home ou Personne
+          });
+        },
+        child: Row(
+          children: [
+            Icon(iconData),
+            Text(text),
+          ],
+        )
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +74,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ElevatedButton(onPressed: _showSnackBar, child: const Text("Montre moi un Snackbar"))
+            ElevatedButton(onPressed: _showSnackBar, child: const Text("Montre moi un Snackbar")),
+            ElevatedButton(onPressed: _simpleDialog, child: const Text("Simple Dialog")),
+            Icon(_iconData, color: Theme.of(context).colorScheme.primary,)
           ],
         ),
       ),

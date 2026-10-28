@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   IconData _iconData =  Icons.person;
+  int _count = 0;
 
   void _showSnackBar(){
       SnackBar snackBar = SnackBar( //SnackBar permet de dire par exemple à l'utilisateur qu'il est connecté ou déconnecrté
@@ -41,6 +42,30 @@ class _HomePageState extends State<HomePage> {
         }
     );
   }
+
+  void _alertDialog(){
+    showDialog(context: context,
+        barrierDismissible: false, //Pour ne pas fermer le diaog lors d'un appui hors du cadre du dialog
+        builder: (BuildContext context){
+            return AlertDialog(
+              title: const Text("Incrémentation"),
+              content: const Text("Etes vous sûr de vouloir incrémenter"),
+              actions: [
+                TextButton(onPressed: (){
+                    Navigator.pop(context);
+                }, child: const Text("Annuler")),
+                 TextButton(onPressed: (){
+                    setState(() {
+                      _count++;
+                    });
+                    Navigator.pop(context);
+                 }, child: const Text("Ok")),
+
+              ],
+            );
+        }
+    );
+}
 
 
   TextButton _dialogButton({required String text, required IconData iconData }){
@@ -76,7 +101,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             ElevatedButton(onPressed: _showSnackBar, child: const Text("Montre moi un Snackbar")),
             ElevatedButton(onPressed: _simpleDialog, child: const Text("Simple Dialog")),
-            Icon(_iconData, color: Theme.of(context).colorScheme.primary,)
+            Icon(_iconData, color: Theme.of(context).colorScheme.primary,),
+            ElevatedButton(onPressed: _alertDialog, child: Text("J'ai confirmé $_count fois"))
           ],
         ),
       ),

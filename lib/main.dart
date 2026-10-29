@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pop_up_et_nav/home.dart';
+import 'package:pop_up_et_nav/pages/first_page.dart';
+import 'package:pop_up_et_nav/pages/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.lightGreen),
       ),
-      home: const HomePage(),
+      home: const FirstPage(),
     );
   }
 }

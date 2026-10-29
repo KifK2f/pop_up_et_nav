@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pop_up_et_nav/home.dart';
+import 'package:pop_up_et_nav/pages/home.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pop_up_et_nav/body.dart';
+import 'package:pop_up_et_nav/widgets/body.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

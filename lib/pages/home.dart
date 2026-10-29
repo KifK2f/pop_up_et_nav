@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pop_up_et_nav/body.dart';
+import 'package:pop_up_et_nav/widgets/body.dart';
 
+//Ce fichier contient un Sacffold donce sera une page ==> va dans le dossier pages
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 

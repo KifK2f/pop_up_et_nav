@@ -4,14 +4,20 @@ import 'package:pop_up_et_nav/widgets/first_page.dart';
 import 'package:pop_up_et_nav/widgets/body.dart';
 
 //Ce fichier contient un Sacffold donce sera une page ==> va dans le dossier pages
-class HomePage extends StatelessWidget {
-  // const HomePage({super.key});
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
 
-  // final List<Widget> _bodies = const [
-  //   Body(),
-  //   FirstPage()
-  // ];
+  const HomePage({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return HomeState();
+  }
+
+}
+
+class HomeState extends State<HomePage> {
+
+  int index = 0;
 
   final List<Tabs> _tabs =  [
     Tabs(name: "Pop Up", iconData: Icons.nature_people, widget: const Body()),
@@ -21,24 +27,30 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: _tabs.length,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Pop Up et Nav"),
-          centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          bottom: TabBar(
-            indicatorColor: Colors.deepPurple,
-            labelColor: Colors.deepPurple,
-            unselectedLabelColor: Colors.white,
-            tabs: _tabs.map((t) => t.tab).toList()
-          ),
-        ),
-        body: TabBarView(
-            children: _tabs.map((t) => t.widget).toList()
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Pop Up et Nav"),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const DrawerHeader(child: Text("Apprendre le drawer")),
+            Column(
+              children: _tabs.map((t){
+                return TextButton(onPressed: (){
+                  setState(() {
+                    Navigator.pop(context);
+                    index = _tabs.indexOf(t);
+                  });
+                }, child: Text(t.name));
+              }).toList(),
+            )
+          ],
         ),
       ),
+      body: _tabs[index].widget
     );
   }
 }

@@ -7,12 +7,7 @@ class FirstPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("First Page"),
-        backgroundColor: Colors.green,
-      ),
-      body: Column(
+    return Column(
         children : [
           TextButton(onPressed: (){
             MaterialPageRoute route = MaterialPageRoute(builder: (BuildContext context){
@@ -38,7 +33,6 @@ class FirstPage extends StatelessWidget {
             },
           )
         ]
-      ),
     );
   }
 }

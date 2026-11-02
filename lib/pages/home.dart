@@ -18,6 +18,7 @@ class HomePage extends StatefulWidget {
 class HomeState extends State<HomePage> {
 
   int index = 0;
+  Widget _widget = const Body();
 
   final List<Tabs> _tabs =  [
     Tabs(name: "Pop Up", iconData: Icons.nature_people, widget: const Body()),
@@ -33,24 +34,26 @@ class HomeState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            const DrawerHeader(child: Text("Apprendre le drawer")),
-            Column(
-              children: _tabs.map((t){
-                return TextButton(onPressed: (){
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.lightGreen,
+        shape: const CircularNotchedRectangle(), //Pour que le floatingaction button puisse être rongé
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: _tabs.map((item) => IconButton(
+                onPressed: (){
                   setState(() {
-                    Navigator.pop(context);
-                    index = _tabs.indexOf(t);
+                    _widget = item.widget;
                   });
-                }, child: Text(t.name));
-              }).toList(),
-            )
-          ],
+                },
+                icon: Icon(item.iconData))).toList(),
         ),
       ),
-      body: _tabs[index].widget
+      body: _widget,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.small(onPressed: (){
+
+      },
+      child: const Icon(Icons.add)),
     );
   }
 }

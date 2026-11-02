@@ -33,15 +33,21 @@ class HomeState extends State<HomePage> {
         title: const Text("Pop Up et Nav"),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      bottomNavigationBar:  BottomNavigationBar(
-          items:_tabs.map((t) => t.item).toList(),
-          currentIndex: index,
-        onTap: (newIndex){
-            setState(() {
-              index = newIndex;
-            });
-        },
+        bottom: PreferredSize(
+            preferredSize: Size(
+                MediaQuery.of(context).size.width,
+                65
+            ),
+            child: NavigationBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              selectedIndex: index,
+              onDestinationSelected: (newIndex){
+                setState(() {
+                  index = newIndex;
+                });
+              },
+              destinations : _tabs.map((t) => t.destination).toList(),
+            ),),
       ),
       body: _tabs[index].widget,
     );

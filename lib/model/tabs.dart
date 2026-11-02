@@ -9,5 +9,7 @@ class Tabs {
 
   BottomNavigationBarItem get item => BottomNavigationBarItem(icon: Icon(iconData), label: name);
 
+  NavigationDestination get destination => NavigationDestination(icon: Icon(iconData), label: name);
+
   Tabs({required this.name, required this.iconData, required this.widget});
 }

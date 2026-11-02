@@ -34,26 +34,16 @@ class HomeState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.lightGreen,
-        shape: const CircularNotchedRectangle(), //Pour que le floatingaction button puisse être rongé
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: _tabs.map((item) => IconButton(
-                onPressed: (){
-                  setState(() {
-                    _widget = item.widget;
-                  });
-                },
-                icon: Icon(item.iconData))).toList(),
-        ),
+      bottomNavigationBar:  BottomNavigationBar(
+          items:_tabs.map((t) => t.item).toList(),
+          currentIndex: index,
+        onTap: (newIndex){
+            setState(() {
+              index = newIndex;
+            });
+        },
       ),
-      body: _widget,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.small(onPressed: (){
-
-      },
-      child: const Icon(Icons.add)),
+      body: _tabs[index].widget,
     );
   }
 }
